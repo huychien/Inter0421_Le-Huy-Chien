@@ -78,6 +78,7 @@ CREATE TABLE KhachHang (
   SoCMTND varchar(45),
   Email varchar(45),
   DiaChi varchar(45),
+  SDT varchar(45),
   PRIMARY KEY (IdKhachHang),
   KEY IdLoaiKhach (IdLoaiKhach),
   CONSTRAINT KhachHang_ibfk_1 FOREIGN KEY (IdLoaiKhach) REFERENCES LoaiKhach (IdLoaiKhach)
@@ -174,13 +175,13 @@ VALUES (1,'Diamond'),
         (5,'Member');
 
 INSERT INTO KhachHang 
-VALUES (1,1,'Nguyen Van J','1999-05-05','028900004289','G@gmail.com','DaNang'),
-		(2,2,'Nguyen Van J','1970-05-05','035200006786','J@gmail.com','QuangTri'),
-        (3,3,'Nguyen Van K','1999-05-05','089600004131','K@gmail.com','DaNang'),
-        (4,4,'Nguyen Van X','1999-05-05','063400006454','X@gmail.com','QuangTri'),
-        (5,5,'Nguyen Van Y','1972-05-05','097300003463','Y@gmail.com','DaNang'),
-        (6,3,'Nguyen Van Z','1999-05-05','013400008967','Z@gmail.com','DaNang'),
-        (7,1,'Nguyen Van I','1990-01-12','042030003232','I@gmail.com','QuangTri');
+VALUES (1,1,'Nguyen Van J','1999-05-05','028900004289','G@gmail.com','Vinh','064563923'),
+		(2,2,'Nguyen Van J','1970-05-05','035200006786','J@gmail.com','QuangTri','04234239'),
+		(3,3,'Nguyen Van K','1999-05-05','089600004131','K@gmail.com','DaNang','09847352'),
+		(4,4,'Nguyen Van X','1999-05-05','063400006454','X@gmail.com','Vinh','01232434'),
+		(5,5,'Nguyen Van Y','1972-05-05','097300003463','Y@gmail.com','QuangNgai','012338424'),
+		(6,3,'Nguyen Van Z','1999-05-05','013400008967','Z@gmail.com','DaNang','012339845'),
+		(7,1,'Nguyen Van I','1990-01-12','042030003232','I@gmail.com','QuangNgai','083250740');
         
 INSERT INTO HopDong 
 VALUES (1,4,1,1,'2019-01-01','2021-05-20',1000,2530),
@@ -211,13 +212,12 @@ VALUES (1,1,2,2),
 và có tối đa 15 ký tự.*/
 
 SELECT * FROM Furama.NhanVien
-WHERE length(HoTen) <= 15
-having HoTen like 'H%' or HoTen like 'K%' or HoTen like 'T%';
+WHERE length(HoTen) <= 15 and (HoTen like 'H%' or HoTen like 'K%' or HoTen like 'T%');
 
 /*Câu 3: Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”.*/
 
 SELECT * FROM Furama.KhachHang
-where DiaChi like 'DaNang' or DiaChi like 'QuangTri' and year(now()) - year(NgaySinh) between 18 and 50;
+where (DiaChi like 'DaNang' or DiaChi like 'QuangTri') and (year(now()) - year(NgaySinh) between 18 and 50);
 
 /*Câu 4: Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. Kết quả hiển thị được sắp xếp tăng dần theo 
 số lần đặt phòng của khách hàng. Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.*/
@@ -226,8 +226,8 @@ select kh.HoTen, count(kh.IdKhachHang) as SoLanDatPhong
 from KhachHang kh 	join HopDong hd on kh.IdKhachHang = hd.IdKhachHang
 					join LoaiKhach lk on kh.IdLoaiKhach = lk.IdLoaiKhach
 Where lk.TenLoaiKhach like 'Diamond'
-group by kh.IdKhachHang
-order by count(kh.IdKhachHang);
+group by kh.HoTen
+order by SoLanDatPhong;
 
 /*Câu 5: Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, TongTien 
 (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) 
@@ -253,8 +253,7 @@ select distinct dv.IdDichVu, TenDichVu, DienTich, ChiPhiThue, TenLoaiDichVu
 from DichVu dv join LoaiDichVu ldv on dv.IdLoaiDichVu = ldv.IdLoaiDichVu
 			   join HopDong hd on dv.IdDichVu = hd.IdDichVu
 			   join KhachHang kh on kh.IdKhachHang = hd.IdKhachHang
-where year(hd.NgayLamHopDong) != 2019 and month(hd.NgayLamHopDong) not between 1 and 3 
-	  and dv.IdDichVu != all (select distinct dv.IdDichVu
+where dv.IdDichVu not in (select distinct dv.IdDichVu
 							from DichVu dv join HopDong hd on dv.IdDichVu = hd.IdDichVu
 							where year(hd.NgayLamHopDong) = 2019 and month(hd.NgayLamHopDong) between 1 and 3);
 
@@ -265,7 +264,7 @@ select distinct dv.IdDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, ldv.
 from DichVu dv join LoaiDichVu ldv on dv.IdLoaiDichVu = ldv.IdLoaiDichVu
 			join HopDong hd on dv.IdDichVu = hd.IdDichVu
 			join KhachHang kh on kh.IdKhachHang = hd.IdKhachHang
-where year(hd.NgayLamHopDong) = 2018 and dv.IdDichVu != all (select distinct dv1.IdDichVu
+where year(hd.NgayLamHopDong) = 2018 and dv.IdDichVu not in (select distinct dv1.IdDichVu
 															from DichVu dv1 join HopDong hd on dv1.IdDichVu = hd.IdDichVu
 															where year(hd.NgayLamHopDong) = 2019
                                                             order by dv1.IdDichVu);
@@ -285,3 +284,95 @@ from KhachHang
 union
 select HoTen
 from KhachHang;
+
+/*Câu 9. Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 thì sẽ 
+có bao nhiêu khách hàng thực hiện đặt phòng.*/
+
+SELECT MONTH(hd.NgayLamHopDong) AS THANG, Count(hd.IdKhachHang) AS SoKhachHangDatPhong
+FROM HopDong hd join KhachHang kh on hd.IdKhachHang = kh.IdKhachHang
+WHERE year(hd.NgayLamHopDong) = 2019
+GROUP BY THANG
+order by THANG;
+
+/*Câu 10. Hiển thị thông tin tương ứng với từng Hợp đồng thì đã sử dụng bao nhiêu Dịch vụ đi kèm. Kết quả hiển thị bao gồm 
+IDHopDong, NgayLamHopDong, NgayKetthuc, TienDatCoc, SoLuongDichVuDiKem (được tính dựa trên việc count các IDHopDongChiTiet).*/
+
+select hd.IdHopDong, NgayLamHopDong, NgayKetthuc, TienDatCoc, count(hdct.IdHopDongChiTiet) as SoLuongDichVuDiKem
+from HopDong hd join HopDongChiTiet hdct on hd.IdHopDong = hdct.IdHopDong
+group by hd.IdHopDong;
+
+/*Câu 11. Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có TenLoaiKhachHang là “Diamond” và có địa chỉ là 
+“Vinh” hoặc “Quảng Ngãi”.*/
+
+select dvdk.IdDichVuDiKem, TenDichVuDiKem, Gia, DonVi, TrangThaiKhaDung, kh.IdKhachHang, DiaChi, TenLoaiKhach 
+from DichVuDiKem dvdk join HopDongChiTiet hdct on dvdk.IdDichVuDiKem = hdct.IdDichVuDiKem
+					  join HopDong hd on hdct.IdHopDong = hd.IdHopDong  
+					  join KhachHang kh on kh.IdKhachHang = hd.IdKhachHang
+					  join LoaiKhach lk on lk.IdLoaiKhach = kh.IdLoaiKhach
+where (kh.DiaChi = "Vinh" or kh.DiaChi = "QuangNgai") and lk.TenLoaiKhach = "Diamond";
+
+/*Câu 12. Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, SoLuongDichVuDikem 
+(được tính dựa trên tổng Hợp đồng chi tiết), TienDatCoc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 
+tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.*/
+
+select hd.IdHopDong, nv.HoTen as TenNhanVien, kh.HoTen as TenKhachHang, kh.SDT as SoDienThoaiKhachHang, TenDichVu, count(IdDichVuDiKem) as SoLuongDichVuDikem, TienDatCoc
+from HopDong hd join KhachHang kh on kh.IdKhachHang = hd.IdKhachHang
+				join DichVu dv on dv.IdDichVu = hd.IdDichVu
+				join HopDongChiTiet hdct on hdct.IdHopDong = hd.IdHopDong
+                join NhanVien nv on nv.IdNhanVien = hd.IdNhanVien
+Where (month(NgayLamHopDong) between 10 and 12) and year(NgayLamHopDong) = 2019 
+and dv.IdDichVu not in (select distinct dv1.IdDichVu
+						from DichVu dv1 join HopDong hd on dv1.IdDichVu = hd.IdDichVu
+						where year(hd.NgayLamHopDong) = 2019 and (month(NgayLamHopDong) between 1 and 6)
+                        order by dv1.IdDichVu)
+group by hd.IdHopDong;
+
+/*Câu 13. Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
+(Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).*/
+
+select dvdk.* 
+from DichVuDiKem dvdk join HopDongChiTiet hdct on hdct.IdDichVuDiKem = dvdk.IdDichVuDiKem
+Where dvdk.IdDichVuDiKem is not null
+group by hdct.IdDichVuDiKem
+having count(hdct.IdHopDongChiTiet) >= all (select count(IdHopDongChiTiet)
+										From HopDongChiTiet
+                                        group by IdDichVuDiKem);
+
+/*Câu 14. Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị 
+bao gồm TenDichVuDiKem, SoLanSuDung.*/
+
+select DichVuDiKem.IdDichVuDiKem, DichVuDiKem.TenDichVuDiKem, count(HopDongChiTiet.IdDichVuDiKem) as so_lan   
+from KhachHang kh   join HopDong on kh.IdKhachHang = HopDong.IdKhachHang    
+					join HopDongChiTiet on HopDong.IdHopDong = HopDongChiTiet.IdHopDong    
+					join DichVuDiKem on HopDongChiTiet.IdDichVuDiKem = DichVuDiKem.IdDichVuDiKem     
+group by IdDichVuDiKem 
+having so_lan = 1;
+
+/*Câu 15. Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai,
+ DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019.*/
+ 
+select hd.IdNhanVien, HoTen, TrinhDo, TenBoPhan, SDT, DiaChi
+from NhanVien nv join HopDong hd on hd.IdNhanVien = nv.IdNhanVien
+				 join TrinhDo td on td.IdTrinhDo = nv.IdTrinhDo
+				 join BoPhan bp on bp.IdBoPhan = nv.IdBoPhan
+group by hd.IdNhanVien
+having count(hd.IdHopDong) <= 3;
+
+/*Câu 16. Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2017 đến năm 2019.*/
+
+delete 
+from NhanVien
+where NhanVien.IdNhanVien not in (SELECT IdNhanVien FROM Furama.HopDong);
+
+/*Câu 17. Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, chỉ cập nhật những khách hàng đã từng
+đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ.*/
+
+update KhachHang kh
+join LoaiKhach lk on kh.IdLoaiKhach = lk.IdLoaiKhach
+join HopDong hd on hd.IdKhachHang = kh.IdKhachHang
+Set kh.IdLoaiKhach = 1
+where kh.IdKhachHang in (select IdKhachHang
+						from HopDong hd
+                        where year(hd.NgayLamHopDong) = 2019 
+						group by hd.IdKhachHang
+						having sum(TongTien) > 10000000);
