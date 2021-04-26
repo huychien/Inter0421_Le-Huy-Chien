@@ -19,6 +19,7 @@ public class Customer implements Serializable {
     private String loaiKhach;
     private String diaChi;
     private Services services;
+    private Movie4D movie4D;
 
     public Customer() {
     }
@@ -106,6 +107,14 @@ public class Customer implements Serializable {
         this.services = services;
     }
 
+    public Movie4D getMovie4D() {
+        return movie4D;
+    }
+
+    public void setMovie4D(Movie4D movie4D) {
+        this.movie4D = movie4D;
+    }
+
     public static void showInformationCustomers(ArrayList<Customer> list) {
         Collections.sort(list, new NameOrBirthdayComparator());
         int id = 1;
@@ -117,7 +126,7 @@ public class Customer implements Serializable {
         }
     }
 
-    public void showInfor() {
-        this.services.showInfor();
+    public void showBookingMovie() {
+        System.out.println(getHoTen() + " | " + getMovie4D().getNameMovie());
     }
 }

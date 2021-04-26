@@ -45,7 +45,7 @@ public class House extends Services implements Serializable {
 
     @Override
     public void showInfor() {
-        System.out.print(super.getId() + " | " + super.getTenDichVu() + " | " + super.getDienTich() + " | " + super.getChiPhiThue() + " | " + super.getSoNguoiToiDa()
+        System.out.println(super.getId() + " | " + super.getTenDichVu() + " | " + super.getDienTich() + " | " + super.getChiPhiThue() + " | " + super.getSoNguoiToiDa()
                 + " | " + super.getKieuThue() + " | " + this.tieuChuan + " | " + this.tienNghiKhac + " | " + this.soTang);
     }
 }
