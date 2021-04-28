@@ -1,46 +1,58 @@
-Model/Customer.java
- Model.Customer
-Model/User.java
- Model.User
-Model/Position.java
- Model.Position
-Model/Service_type.java
- Model.Service_type
-Model/Rent_type.java
- Model.Rent_type
-Model/Contract_detail.java
- Model.Contract_detail
-Model/Education_degree.java
- Model.Education_degree
-Model/Division.java
- Model.Division
-Model/Employee.java
- Model.Employee
-Model/Attach_service.java
- Model.Attach_service
-Model/Role.java
- Model.Role
-Model/Contract.java
- Model.Contract
-Connection/ConnectionUtils.java
- Connection.ConnectionUtils
-Model/User_Role.java
- Model.User_Role
-Model/Customer_type.java
- Model.Customer_type
-Model/Service.java
- Model.Service
-Sevices/Service.java
- Sevices.Service
-Repository/EmployeeRepository.java
- Repository.EmployeeRepository
-Sevices/EmployeeService.java
- Sevices.EmployeeService
-Sevices/CustomerService.java
- Sevices.CustomerService
-Repository/CustomerRepository.java
- Repository.CustomerRepository
-Repository/ServiceRepository.java
- Repository.ServiceRepository
 Controller/HomeServlet.java
  Controller.HomeServlet
+Connection/ConnectionUtils.java
+ Connection.ConnectionUtils
+Model/Bean/User.java
+ Model.Bean.User
+Model/Bean/User_Role.java
+ Model.Bean.User_Role
+Model/Bean/Service.java
+ Model.Bean.Service
+Model/Bean/Education_degree.java
+ Model.Bean.Education_degree
+Model/Repository/ContractRepository.java
+ Model.Repository.ContractRepository
+Model/Bean/Contract_detail.java
+ Model.Bean.Contract_detail
+Model/Service/Service.java
+ Model.Service.Service
+Model/Bean/Employee.java
+ Model.Bean.Employee
+Model/Bean/Division.java
+ Model.Bean.Division
+Model/Bean/Role.java
+ Model.Bean.Role
+Model/Service/CustomerService.java
+ Model.Service.CustomerService
+Model/Bean/Attach_service.java
+ Model.Bean.Attach_service
+Model/Bean/Position.java
+ Model.Bean.Position
+Model/Bean/Rent_type.java
+ Model.Bean.Rent_type
+Model/Repository/ServiceRepository.java
+ Model.Repository.ServiceRepository
+Model/Bean/Customer_type.java
+ Model.Bean.Customer_type
+Controller/ServiceServlet.java
+ Controller.ServiceServlet
+Controller/ContractServlet.java
+ Controller.ContractServlet
+Model/Bean/Service_type.java
+ Model.Bean.Service_type
+Model/Repository/CustomerRepository.java
+ Model.Repository.CustomerRepository
+Model/Bean/Contract.java
+ Model.Bean.Contract
+Model/Bean/Customer.java
+ Model.Bean.Customer
+Model/Service/ContractService.java
+ Model.Service.ContractService
+Model/Service/EmployeeService.java
+ Model.Service.EmployeeService
+Model/Repository/EmployeeRepository.java
+ Model.Repository.EmployeeRepository
+Controller/CustomerServlet.java
+ Controller.CustomerServlet
+Controller/EmployeeServlet.java
+ Controller.EmployeeServlet
