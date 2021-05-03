@@ -1,6 +1,6 @@
 package Model.Bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Contract {
     private int contract_id;

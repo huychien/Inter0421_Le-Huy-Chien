@@ -1,58 +1,86 @@
-Controller/HomeServlet.java
- Controller.HomeServlet
-Connection/ConnectionUtils.java
- Connection.ConnectionUtils
+Model/Bean/Customer_type.java
+ Model.Bean.Customer_type
 Model/Bean/User.java
  Model.Bean.User
-Model/Bean/User_Role.java
- Model.Bean.User_Role
-Model/Bean/Service.java
- Model.Bean.Service
-Model/Bean/Education_degree.java
- Model.Bean.Education_degree
-Model/Repository/ContractRepository.java
- Model.Repository.ContractRepository
-Model/Bean/Contract_detail.java
- Model.Bean.Contract_detail
-Model/Service/Service.java
- Model.Service.Service
-Model/Bean/Employee.java
- Model.Bean.Employee
-Model/Bean/Division.java
- Model.Bean.Division
-Model/Bean/Role.java
- Model.Bean.Role
 Model/Service/CustomerService.java
  Model.Service.CustomerService
+Model/Bean/Customer.java
+ Model.Bean.Customer
+Model/Bean/Service.java
+ Model.Bean.Service
+Model/Repository/CustomerRepository.java
+ Model.Repository.CustomerRepository
+Model/Bean/Education_degree.java
+ Model.Bean.Education_degree
+Model/Repository/DivisionRepository.java
+ Model.Repository.DivisionRepository
+Connection/ConnectionUtils.java
+ Connection.ConnectionUtils
+Model/Bean/User_Role.java
+ Model.Bean.User_Role
+Model/Bean/Employee.java
+ Model.Bean.Employee
+Model/Bean/Contract_detail.java
+ Model.Bean.Contract_detail
+Model/Repository/UserRoleRepository.java
+ Model.Repository.UserRoleRepository
+Model/Bean/Service_type.java
+ Model.Bean.Service_type
+Model/Bean/Role.java
+ Model.Bean.Role
+Model/Repository/RoleRepository.java
+ Model.Repository.RoleRepository
+Model/Bean/Division.java
+ Model.Bean.Division
+Model/Service/EducationService.java
+ Model.Service.EducationService
 Model/Bean/Attach_service.java
  Model.Bean.Attach_service
 Model/Bean/Position.java
  Model.Bean.Position
 Model/Bean/Rent_type.java
  Model.Bean.Rent_type
-Model/Repository/ServiceRepository.java
- Model.Repository.ServiceRepository
-Model/Bean/Customer_type.java
- Model.Bean.Customer_type
-Controller/ServiceServlet.java
- Controller.ServiceServlet
-Controller/ContractServlet.java
- Controller.ContractServlet
-Model/Bean/Service_type.java
- Model.Bean.Service_type
-Model/Repository/CustomerRepository.java
- Model.Repository.CustomerRepository
-Model/Bean/Contract.java
- Model.Bean.Contract
-Model/Bean/Customer.java
- Model.Bean.Customer
-Model/Service/ContractService.java
- Model.Service.ContractService
-Model/Service/EmployeeService.java
- Model.Service.EmployeeService
+Model/Repository/UserRepository.java
+ Model.Repository.UserRepository
+Model/Repository/CustomerTypeRepository.java
+ Model.Repository.CustomerTypeRepository
+Model/Service/CustomerTypeService.java
+ Model.Service.CustomerTypeService
+Model/Repository/PositionRepository.java
+ Model.Repository.PositionRepository
+Model/Service/PositionService.java
+ Model.Service.PositionService
 Model/Repository/EmployeeRepository.java
  Model.Repository.EmployeeRepository
-Controller/CustomerServlet.java
- Controller.CustomerServlet
+Model/Repository/EducationRepository.java
+ Model.Repository.EducationRepository
+Model/Repository/ServiceRepository.java
+ Model.Repository.ServiceRepository
+Model/Repository/RentTypeRepository.java
+ Model.Repository.RentTypeRepository
+Model/Bean/Contract.java
+ Model.Bean.Contract
+Model/Service/ContractService.java
+ Model.Service.ContractService
+Model/Service/DivisionService.java
+ Model.Service.DivisionService
+Model/Repository/ContractRepository.java
+ Model.Repository.ContractRepository
+Model/Service/EmployeeService.java
+ Model.Service.EmployeeService
+Model/Repository/ServiceTypeRepository.java
+ Model.Repository.ServiceTypeRepository
+Controller/LoginServlet.java
+ Controller.LoginServlet
+Controller/HomeServlet.java
+ Controller.HomeServlet
+Controller/ContractServlet.java
+ Controller.ContractServlet
 Controller/EmployeeServlet.java
  Controller.EmployeeServlet
+Controller/ServiceServlet.java
+ Controller.ServiceServlet
+Model/Service/ServiceService.java
+ Model.Service.ServiceService
+Controller/CustomerServlet.java
+ Controller.CustomerServlet

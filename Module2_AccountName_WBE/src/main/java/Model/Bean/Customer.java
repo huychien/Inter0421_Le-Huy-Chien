@@ -1,6 +1,6 @@
 package Model.Bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Customer {
     private int customer_id;
@@ -19,6 +19,18 @@ public class Customer {
     public Customer(int customer_id, Customer_type customer_type, String customer_name, Date customer_birthday,
                     int customer_gender, String customer_id_card, String customer_phone, String customer_email, String customer_address) {
         this.customer_id = customer_id;
+        this.customer_type = customer_type;
+        this.customer_name = customer_name;
+        this.customer_birthday = customer_birthday;
+        this.customer_gender = customer_gender;
+        this.customer_id_card = customer_id_card;
+        this.customer_phone = customer_phone;
+        this.customer_email = customer_email;
+        this.customer_address = customer_address;
+    }
+
+    public Customer(Customer_type customer_type, String customer_name, Date customer_birthday,
+                    int customer_gender, String customer_id_card, String customer_phone, String customer_email, String customer_address) {
         this.customer_type = customer_type;
         this.customer_name = customer_name;
         this.customer_birthday = customer_birthday;

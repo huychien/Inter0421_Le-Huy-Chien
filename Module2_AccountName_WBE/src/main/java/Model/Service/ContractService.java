@@ -3,26 +3,23 @@ package Model.Service;
 import Model.Bean.Contract;
 import Model.Repository.ContractRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
-public class ContractService implements ContractRepository {
-    @Override
-    public ArrayList<Contract> searchContract(String customerName) {
-        return null;
+public class ContractService {
+    public static ArrayList<Contract> findAll(HttpServletRequest request) {
+        return ContractRepository.finAll(request);
     }
 
-    @Override
     public void deleteContract(int id) {
 
     }
 
-    @Override
     public void updateContract(int id) {
 
     }
 
-    @Override
-    public void addContract(Contract contract) {
-
+    public static boolean addContract(Contract contract, HttpServletRequest request) {
+        return ContractRepository.addContract(contract, request);
     }
 }
